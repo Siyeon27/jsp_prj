@@ -1,0 +1,60 @@
+@charset "UTF-8"; 
+
+ body,  div,  form, h1, h2, h3, h4, h5, h6{
+	margin: 0;
+	padding: 0
+}
+
+body, button, input, select, td, textarea, th {
+	font-size: 14px;
+	line-height: 1.5;
+	font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕",
+		helvetica, "Apple SD Gothic Neo", sans-serif;
+	color: #333;
+	letter-spacing: -1px
+}
+
+li, ol, ul {
+	list-style: none
+}
+
+fieldset, img, input {
+	border: none
+}
+
+button {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	text-indent: -1000em;
+	overflow: hidden;
+	cursor: pointer
+}
+
+cite, em, i, address {
+	font-style: normal
+}
+
+hr {
+	display: none;
+	clear: both
+}
+
+a {
+	color: #333;
+	text-decoration: none
+}
+
+a:hover {
+	text-decoration: underline
+}
+
+.inputBox{	
+	height: 21px; border:1px solid #D4D4D4; background-color: #FFFFFF;	
+}
+
+.btnBox{
+	height: 25px; border:1px solid #D4D4D4; background-color: #FFFFFF;
+	cursor: pointer;padding-left: 5px; padding-right: 5px;
+	margin-left: 5px	
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title><![CDATA[속보 | JTBC News]]></title>
+		<link><![CDATA[https://news.jtbc.co.kr]]></link>
+		<description><![CDATA[뉴스의 현장에서 뵙겠습니다.]]></description>
+		<language>ko</language>
+		<atom:link
+			href="https://news-ex.jtbc.co.kr/v1/get/rss/newsflesh" rel="self"
+			type="application/rss+xml" />
+		<copyright>Copyright(C) JTBC All rights reserved.</copyright>
+		<category><![CDATA[속보]]></category>
+		<pubDate>Mon, 15 Dec 2025 10:33:37 +0900</pubDate>
+		<item>
+			<title><![CDATA[[속보] 특검 "김건희·조희대 계엄 관여 의혹은 사실 아냐"]]></title>
+			<link><![CDATA[https://news.jtbc.co.kr/article/NB12275264]]></link>
+			<guid><![CDATA[https://news.jtbc.co.kr/article/NB12275264]]></guid>
+			<description><![CDATA[[속보] 특검 "김건희·조희대 계엄 관여 의혹은 사실 아냐"]]></description>
+			<pubDate>Mon, 15 Dec 2025 10:33:37 +0900</pubDate>
+		</item>
+		<item>
+			<title><![CDATA[경찰, 한학자 피의자 전환…정치권 '통일교 금품수수 의혹']]></title>
+			<link><![CDATA[https://news.jtbc.co.kr/article/NB12275260]]></link>
+			<guid><![CDATA[https://news.jtbc.co.kr/article/NB12275260]]></guid>
+			<description><![CDATA[정치권 인사들의 통일교 금품 수수 의혹을 수사하는 경찰이 금품 공여 혐의를 받는 한학자 통일교 총재를 피의자로 전환했습니다.
+
+경찰청 국가수사본부 특별전담수사팀은 오늘(15일) 오전 9시쯤부터 경기 가평 통일교 천정]]></description>
+			<pubDate>Mon, 15 Dec 2025 10:23:04 +0900</pubDate>
+		</item>
+		<item>
+			<title><![CDATA[[속보] "윤, 북 무력도발 유도하려 작년 10월부터 비정상 군사작전 실행"]]></title>
+			<link><![CDATA[https://news.jtbc.co.kr/article/NB12275256]]></link>
+			<guid><![CDATA[https://news.jtbc.co.kr/article/NB12275256]]></guid>
+			<description><![CDATA[[속보] "윤, 북 무력도발 유도하려 작년 10월부터 비정상 군사작전 실행"]]></description>
+			<pubDate>Mon, 15 Dec 2025 10:16:46 +0900</pubDate>
+		</item>
+		<item>
+			<title><![CDATA[[속보]특검 "윤, 총살·한동훈 빨갱이 언급…반대세력 제거위해 계엄"]]></title>
+			<link><![CDATA[https://news.jtbc.co.kr/article/NB12275255]]></link>
+			<guid><![CDATA[https://news.jtbc.co.kr/article/NB12275255]]></guid>
+			<description><![CDATA[특검 "윤, 총살·한동훈 빨갱이 언급…반대세력 제거위해 계엄"]]></description>
+			<pubDate>Mon, 15 Dec 2025 10:15:52 +0900</pubDate>
+		</item>
+		<item>
+			<title><![CDATA[특검 "윤석열, 반대파 제거하려 비상계엄...2023년 10월 이전 준비"]]></title>
+			<link><![CDATA[https://news.jtbc.co.kr/article/NB12275250]]></link>
+			<guid><![CDATA[https://news.jtbc.co.kr/article/NB12275250]]></guid>
+			<description><![CDATA[조은석 내란 특별검사팀이 윤석열 전 대통령 등이 "군을 통해 무력으로 정치활동 및 국회 기능을 정지시키고 국회를 대체할 비상입법기구를 통해 입법권과 사법권을 장악한 후 반대세력을 제거하고 권력을 독점·유지할 목적으로]]></description>
+			<pubDate>Mon, 15 Dec 2025 10:01:06 +0900</pubDate>
+		</item>
+	</channel>
+</rss>
