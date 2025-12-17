@@ -65,6 +65,7 @@ $(function(){
 					<c:out value="${ userId }"/>( 
 					<a href="${CommonURL }/mypage/mypage.jsp"><c:out value="${ userName }"/></a> )
 					님 안녕하세요? <a href="${CommonURL }/login/logout.jsp">로그아웃</a>
+					<a href="${CommonURL }/map/mapList.jsp">등록한 장소 보기</a>
 					<br>
 					</c:when>
 					<c:otherwise>

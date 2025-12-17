@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../fragments/siteProperty.jsp" %>
+<%@ include file="../fragments/loginChk2.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
@@ -11,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 
-<title>맵 연습</title>
+<title>등록 위치 보기</title>
 <link rel="shortcut icon" href="http://192.168.10.92/jsp_prj/common/images/favicon.ico">
 
 <script src="http://192.168.10.92/jsp_prj/common/js/color-modes.js"></script>
@@ -41,7 +42,34 @@ $(function(){
 });//ready
 
 </script>
-
+<!-- 다음 지도 API -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3c5d3a0fae10d8e35ccb59548be27914"></script>
+<script>
+window.onload=function(){
+		
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = { 
+	        center: new kakao.maps.LatLng(37.504728468139334, 127.05316112695829), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };
+	
+	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	
+	// 마커가 표시될 위치입니다 
+	var markerPosition  = new kakao.maps.LatLng(37.504728468139334, 127.05316112695829); 
+	
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition
+	});
+	
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
+	
+	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+	// marker.setMap(null);    
+}//onload
+</script>
 </head>
 <body>
 	<svg xmlns="http://www.w3.org/2000/svg" class="d-none"> <symbol
@@ -68,8 +96,12 @@ $(function(){
 			<!-- START THE FEATURETTES -->
 			<hr class="featurette-divider">
 			<div class="row featurette">
-				<div class="col-md-7">
-					회원 가입 양식
+				<div>
+				<h2>식당 리스트</h2>
+				<div id="map" style="width:100%;height:350px;"></div>
+				
+				
+				
 				</div>
 			</div>
 			<hr class="featurette-divider">
