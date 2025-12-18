@@ -1,6 +1,3 @@
-<%@page import="kr.co.sist.map.RestaurantDTO"%>
-<%@page import="java.util.List"%>
-<%@page import="kr.co.sist.map.RestaurantService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -15,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 
-<title>등록 위치 보기</title>
+<title>식당 등록</title>
 <link rel="shortcut icon" href="http://192.168.10.92/jsp_prj/common/images/favicon.ico">
 
 <script src="http://192.168.10.92/jsp_prj/common/js/color-modes.js"></script>
@@ -42,114 +39,82 @@
 <script type="text/javascript">
 $(function(){
 	$("#btnAdd").click(function(){
-		location.href = "addMap.jsp";
+		//입력값에 대한 유효성 검증
+		var rest_name = $("#rest_name").val();
+		var param = {
+			rest_name: rest_name,
+			menu: $("#menu").val(),
+			info: $("#info").val(),
+			lat: $("#lat").val(),
+			lng: $("#lng").val(),
+		}
+		
+		$.ajax({
+			url: "addMapProcess.jsp",
+			type: "GET",
+			data: param,  
+			dataType:"JSON",
+			error: function(xhr){
+				alert("식당 등록 실패!!");
+				console.log(xhr.status);
+			},
+			success: function(jsonObj){
+				var msg = rest_name + " 등록을 실패하셨습니다.";
+				if(jsonObj.resultFlag){
+					msg = rest_name + "을 성공적으로 추가하였습니다.";
+					
+					$("#rest_name").val("");
+					$("#menu").val("");
+					$("#info").val("");
+					$("#lat").val("");
+					$("#lng").val("");
+					$("#vLat").text("");
+					$("#vLng").text("");
+				}
+				
+				alert(msg);
+			}
+		})
 	})
 });//ready
 
 </script>
-<!-- 다음 지도 API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3c5d3a0fae10d8e35ccb59548be27914"></script>
 <script>
-var map;
-var markerPosition;
-var marker;
-
 window.onload=function(){
-		
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	    mapOption = { 
-	        center: new kakao.maps.LatLng(37.504728468139334, 127.05316112695829), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
-	    };
 	
-	map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-	
-	// 마커가 표시될 위치입니다 
-	markerPosition  = new kakao.maps.LatLng(37.504728468139334, 127.05316112695829); 
-	
-	// 마커를 생성합니다
-	marker = new kakao.maps.Marker({
-	    position: markerPosition
-	});
-	
-	// 마커가 지도 위에 표시되도록 설정합니다
-	marker.setMap(map);
-	
-	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-	// marker.setMap(null);    
-}//onload
-
-function viewRestaurant(lat, lng){
-	setCenter(lat, lng); //중심좌표 이동
-	panTo(lat, lng);//부드럽게 이동
-	setMarker(lat, lng); //마커 표기
-}
-
-function setCenter(lat, lng) {            
-	// 이동할 위도 경도 위치를 생성합니다 
-	var moveLatLon = new kakao.maps.LatLng(lat, lng);
-	    
-	// 지도 중심을 이동 시킵니다
-	 map.setCenter(moveLatLon);
-}
-
-function panTo(lat, lng) {
-	// 이동할 위도 경도 위치를 생성합니다 
-	var moveLatLon = new kakao.maps.LatLng(lat, lng);
-	    
-	// 지도 중심을 부드럽게 이동시킵니다
-	// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-	map.panTo(moveLatLon);            
-}
-
-function setMarker(lat, lng){
-	// 마커가 표시될 위치입니다 
-	markerPosition  = new kakao.maps.LatLng(lat, lng); 
-	
-	// 마커를 생성합니다
-	marker = new kakao.maps.Marker({
-	    position: markerPosition
-	});
-	
-	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-	marker.setMap(null);
-	
-	// 마커가 지도 위에 표시되도록 설정합니다
-	marker.setMap(map);
-}
-
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-mapOption = { 
-    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-    level: 10 // 지도의 확대 레벨 
-}; 
+    mapOption = { 
+        center: new kakao.maps.LatLng(37.504728468139334, 127.05316112695829), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-//HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-if (navigator.geolocation) {
+// 지도를 클릭한 위치에 표출할 마커입니다
+var marker = new kakao.maps.Marker({ 
+    // 지도 중심좌표에 마커를 생성합니다 
+    position: map.getCenter() 
+}); 
+// 지도에 마커를 표시합니다
+marker.setMap(map);
 
-// GeoLocation을 이용해서 접속 위치를 얻어옵니다
-navigator.geolocation.getCurrentPosition(function(position) {
+// 지도에 클릭 이벤트를 등록합니다
+// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
     
-    var lat = position.coords.latitude, // 위도
-        lon = position.coords.longitude; // 경도
+    // 클릭한 위도, 경도 정보를 가져옵니다 
+    var latlng = mouseEvent.latLng; 
     
-    var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-        message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+    // 마커 위치를 클릭한 위치로 옮깁니다
+    marker.setPosition(latlng);
     
-    // 마커와 인포윈도우를 표시합니다
-    displayMarker(locPosition, message);
-        
-  });
-
-} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-
-var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
-    message = 'geolocation을 사용할수 없어요..'
-    
-displayMarker(locPosition, message);
-}
+    $("#vLat").text(latlng.getLat());
+    $("#vLng").text(latlng.getLng());
+    $("#lat").val(latlng.getLat());
+    $("#lng").val(latlng.getLng());
+});
+}//onload
 </script>
 </head>
 <body>
@@ -178,43 +143,38 @@ displayMarker(locPosition, message);
 			<hr class="featurette-divider">
 			<div class="row featurette">
 				<div>
-				<h2>식당 리스트</h2>
-				<div id="map" style="width:100%;height:350px;"></div>
-				<input type="button" value="식당 등록" class="btn btn-info btn-sm"  id="btnAdd"/>
-				
-				<div>
-				<%
-				RestaurantService rs = RestaurantService.getInstance();
-				String id = (String)session.getAttribute("userId");
-				List<RestaurantDTO> list = rs.searchRestaurant(id);
-				pageContext.setAttribute("restList", list);
-				%>
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>번호</th>
-							<th>식당명</th>
-							<th>주메뉴</th>
-							<th>입력일</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="rDTO" items="${restList }" varStatus="i">
-							<tr>
-								<td><c:out value="${i.count }" /> </td>
-								<td><c:out value="${rDTO.rest_name }" /> </td>
-								<td><c:out value="${rDTO.menu }" /> </td>
-								<td><c:out value="${rDTO.input_date }" /> </td>
-								<td><input type="button" value="보기" class="btn btn-info btn-sm"
-								 onclick="viewRestaurant(${rDTO.lat}, ${rDTO.lng })" /></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				
-				</div>
-				
+					<h2>맛집 등록</h2>
+					<div id="map" style="width:100%;height:350px;"></div>
+					
+					<table>
+					 <tr>
+					 	<td>식당명</td>
+					 	<td><input type="text" name="rest_name" id="rest_name"
+					 		style="width: 350px; "></td>
+					 </tr>
+					 <tr>
+					 	<td>대표 메뉴</td>
+					 	<td><input type="text" name="menu" id="menu"
+							style="width: 350px; "></td>
+					 </tr>
+					 <tr>
+					 	<td>상세 정보</td>
+					 	<td><textarea name="info" id="info" style="width:350px; height: 150px;"></textarea></td>
+					 </tr>
+					 <tr>
+					 	<td>위도/경도</td>
+					 	<td><span id="vLat"> </span>/<span id="vLng"></span>
+					 		<input type="hidden" name="lat" id="lat" />
+					 		<input type="hidden" name="lng" id="lng" />
+					 	</td>
+					 </tr>
+					 <tr>
+					 	<td colspan="2" style="text-align: center;">
+					 		<input type="button" value="등록" id="btnAdd" class="btn btn-primary btn-sm"/>
+					 		<a href="mapList.jsp" class="btn btn-info btn-sm">리스트</a></td>
+					 	</td>
+					 </tr>
+					</table>
 				</div>
 			</div>
 			<hr class="featurette-divider">
