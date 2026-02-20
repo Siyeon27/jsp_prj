@@ -31,7 +31,7 @@ public class SiteProperty {
 			if( rs.next() ) {
 				spVO=new SitePropertyVO(rs.getString("protocol"), 
 						rs.getString("server_name"),
-						rs.getString("context_root"), 
+						rs.getString("context_root")==null?"":rs.getString("context_root"), 
 						rs.getString("manage_path"),
 						rs.getString("key"), 
 						rs.getString("title"));

@@ -15,15 +15,15 @@
 <meta name="description" content="">
 
 <title>게시판 리스트</title>
-<link rel="shortcut icon" href="http://192.168.10.92/jsp_prj/common/images/favicon.ico">
+<link rel="shortcut icon" href="${CommonURL }/common/images/favicon.ico">
 
-<script src="http://192.168.10.92/jsp_prj/common/js/color-modes.js"></script>
+<script src="${CommonURL }/common/js/color-modes.js"></script>
 <!-- bootstrap CDN 시작 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 <meta name="theme-color" content="#712cf9">
-<link href="http://192.168.10.92/jsp_prj/common/css/carousel.css" rel="stylesheet">
+<link href="${CommonURL }/common/css/carousel.css" rel="stylesheet">
 <jsp:include page="../fragments/bootstrap_css.jsp"/>
 <style type="text/css">
 #wrap{  margin: 0px auto; width: 1200px; height: 1000px; }	
@@ -109,57 +109,57 @@ function checkLogin(){
 					<jsp:setProperty property="*" name="rDTO"/>
 					<%
 					BoardService bs=BoardService.getInstance();
-					
-					//1.총 게시글의 수
-					int totalCount=bs.totalCnt(rDTO);
-					
-					//2.한 화면에 보여줄 게시물의 수
-					int pageScale=bs.pageScale();
-					
-					//3.총 페이지의수
-					int totalPage= bs.totalPage(totalCount, pageScale);
-					
-					//4.시작번호
-					String tempPage=request.getParameter("currentPage");
-					
-					int currentPage=1;
-					if( tempPage != null ){//사용자가 pagination을 클릭하여 정상적인 값이 입력된 경우
-						try{
-							currentPage=Integer.parseInt(tempPage);
-						}catch(NumberFormatException nfe){
-						}//end catch
-					}//end if
-					
-					int startNum=bs.startNum(currentPage, pageScale);
-					//1페이지 클릭 : 1*10-10+1 =1 , 2페이지 클릭 : 2*10-10+1 = 11
-					//5.끝번호
-					int endNum=bs.endNum(startNum, pageScale);
+								
+								//1.총 게시글의 수
+								int totalCount=bs.totalCnt(rDTO);
+								
+								//2.한 화면에 보여줄 게시물의 수
+								int pageScale=bs.pageScale();
+								
+								//3.총 페이지의수
+								int totalPage= bs.totalPage(totalCount, pageScale);
+								
+								//4.시작번호
+								String tempPage=request.getParameter("currentPage");
+								
+								int currentPage=1;
+								if( tempPage != null ){//사용자가 pagination을 클릭하여 정상적인 값이 입력된 경우
+									try{
+										currentPage=Integer.parseInt(tempPage);
+									}catch(NumberFormatException nfe){
+									}//end catch
+								}//end if
+								
+								int startNum=bs.startNum(currentPage, pageScale);
+								//1페이지 클릭 : 1*10-10+1 =1 , 2페이지 클릭 : 2*10-10+1 = 11
+								//5.끝번호
+								int endNum=bs.endNum(startNum, pageScale);
 
-					//rDTO는 시작번호와 끝번호를 web parameter로 받지 않고, 
-					//연산된 값(위 1항~5항)으로 설정 한다. 
-					
-					rDTO.setStartNum(startNum);
-					rDTO.setEndNum(endNum);
-					
-					//6. 시작번호와 끝 번호사이에 해당하는 게시글을 조회
-					List<BoardDTO> boardList=bs.searchBoardList(rDTO);
-					//글 제목이 20글자를 초과하면 19자까지만 보여주고 나머지는 ...으로 처리.
-					bs.titleSubStr( boardList );
-					rDTO.setUrl("boardList.jsp");
-					rDTO.setTotalPage(totalPage);
-					
-					String pagination=bs.pagination(rDTO);
-					String pagination2=bs.pagination2(rDTO,"left");
-							
-					pageContext.setAttribute("totalCount", totalCount);
-					pageContext.setAttribute("pageScale", pageScale);
-					pageContext.setAttribute("totalPage", totalPage);
-					pageContext.setAttribute("currentPage", currentPage);
-					pageContext.setAttribute("startNum", startNum);
-					pageContext.setAttribute("endNum", endNum);
-					pageContext.setAttribute("boardList", boardList);
-					pageContext.setAttribute("pagination", pagination);
-					pageContext.setAttribute("pagination2", pagination2);
+								//rDTO는 시작번호와 끝번호를 web parameter로 받지 않고, 
+								//연산된 값(위 1항~5항)으로 설정 한다. 
+								
+								rDTO.setStartNum(startNum);
+								rDTO.setEndNum(endNum);
+								
+								//6. 시작번호와 끝 번호사이에 해당하는 게시글을 조회
+								List<BoardDTO> boardList=bs.searchBoardList(rDTO);
+								//글 제목이 20글자를 초과하면 19자까지만 보여주고 나머지는 ...으로 처리.
+								bs.titleSubStr( boardList );
+								rDTO.setUrl("boardList.jsp");
+								rDTO.setTotalPage(totalPage);
+								
+								String pagination=bs.pagination(rDTO);
+								String pagination2=bs.pagination2(rDTO,"left");
+										
+								pageContext.setAttribute("totalCount", totalCount);
+								pageContext.setAttribute("pageScale", pageScale);
+								pageContext.setAttribute("totalPage", totalPage);
+								pageContext.setAttribute("currentPage", currentPage);
+								pageContext.setAttribute("startNum", startNum);
+								pageContext.setAttribute("endNum", endNum);
+								pageContext.setAttribute("boardList", boardList);
+								pageContext.setAttribute("pagination", pagination);
+								pageContext.setAttribute("pagination2", pagination2);
 					%>
 					<br>
 					<%-- 

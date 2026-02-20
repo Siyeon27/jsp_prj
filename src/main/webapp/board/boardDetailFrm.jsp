@@ -14,7 +14,7 @@ if( num != null){//입력된 번호가 있다면
 		int tempNum=Integer.parseInt(num);
 		Object obj=session.getAttribute(String.valueOf(tempNum));
 		if(obj == null){
-			bs.modifyBoardCnt(tempNum); //세션에 값이 없을 때에만 카운트를 올림.
+	bs.modifyBoardCnt(tempNum); //세션에 값이 없을 때에만 카운트를 올림.
 		}//end if
 		
 		BoardDTO bDTO=bs.searchOneBoard(tempNum);//게시글 하나 읽기
@@ -35,15 +35,15 @@ if( num != null){//입력된 번호가 있다면
 <meta name="description" content="">
 
 <title>게시판 읽기</title>
-<link rel="shortcut icon" href="http://192.168.10.92/jsp_prj/common/images/favicon.ico">
+<link rel="shortcut icon" href="${CommonURL }/common/images/favicon.ico">
 
-<script src="http://192.168.10.92/jsp_prj/common/js/color-modes.js"></script>
+<script src="${CommonURL }/common/js/color-modes.js"></script>
 <!-- bootstrap CDN 시작 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 <meta name="theme-color" content="#712cf9">
-<link href="http://192.168.10.92/jsp_prj/common/css/carousel.css" rel="stylesheet">
+<link href="${CommonURL }/common/css/carousel.css" rel="stylesheet">
 <jsp:include page="../fragments/bootstrap_css.jsp"/>
 <style type="text/css">
 #wrap{  margin: 0px auto; width: 1200px; height: 1000px; }	

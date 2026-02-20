@@ -231,7 +231,7 @@ $(function(){
 				<div class="col-md-7">
 				<%= request.getCookies()[0].getValue() %>
 				 세션값 : <%= session.getAttribute("name") %><br>
-					<a href="http://localhost/jsp_prj/login/loginFrm.jsp">로그인</a>
+					<a href="${CommonURL }/login/loginFrm.jsp">로그인</a>
 				</div>
 				
 			</div>
